@@ -1,0 +1,33 @@
+from PIL import Image
+import matplotlib.pyplot as plt
+
+def shift_center(image_path, shift_amount_width, shift_amount_height):
+    # Open the image
+    img = Image.open(image_path)
+    
+    # Get image size
+    width, height = img.size
+    
+    # Calculate shift amount
+    shift_pixels_width = int(shift_amount_width * width)
+    shift_pixels_height = int(shift_amount_height * height)
+    
+    # Create a black canvas for the shifted image
+    shifted_img = Image.new("RGB", (width, height), "black")
+    
+    # Paste the original image onto the canvas with center shifted
+    shifted_img.paste(img, (shift_pixels_width, shift_pixels_height))
+    
+    # Display the image
+    plt.imshow(shifted_img)
+    plt.axis('off')
+    plt.show()
+    
+    # Save the image
+    shifted_img.save("/content/drive/MyDrive/DIP/shifted.jpeg")
+
+# Example usage
+image_path = "/content/drive/MyDrive/DIP/images.jpeg"  # Replace with your image path
+shift_amount_width = 0.2  # Percentage of shift in width
+shift_amount_height = - 0.2  # Percentage of shift in height
+shift_center(image_path, shift_amount_width, shift_amount_height)
